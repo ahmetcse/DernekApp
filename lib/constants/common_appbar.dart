@@ -14,28 +14,36 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppBar(
-      leading: Navigator.canPop(context) 
-          ? IconButton(
-              icon: const Icon(Icons.arrow_back),
-              onPressed: () => Navigator.of(context).pop(),
-            )
-          : null,
-      title: Text(title),
-      actions: [
-        IconButton(
-          icon: const Icon(Icons.notifications),
-          onPressed: () {
-            // Navigate to notifications
-          },
+    return Stack(
+      children: [
+        // Arka plan resmi
+        Positioned.fill(
+          child: Image.asset(
+            'assets/images/Fatihistanbul.jpg', // Resim dosyasının yolu
+            fit: BoxFit.cover,
+          ),
         ),
-        IconButton(
-          icon: const Icon(Icons.person),
-          onPressed: onProfileTap,
-        ),
-        IconButton(
-          icon: const Icon(Icons.settings),
-          onPressed: onSettingsTap,
+        // Üst katmanda AppBar içeriği
+        AppBar(
+          backgroundColor: Colors.transparent, // Şeffaf AppBar
+          elevation: 0, // Gölgeyi kaldır
+          leading: Navigator.canPop(context)
+              ? IconButton(
+                  icon: const Icon(Icons.arrow_back, color: Colors.white),
+                  onPressed: () => Navigator.of(context).pop(),
+                )
+              : null,
+          title: Text(
+            title,
+            style:
+                const TextStyle(color: Colors.white), // Yazı rengini beyaz yap
+          ),
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.settings, color: Colors.white),
+              onPressed: onSettingsTap,
+            ),
+          ],
         ),
       ],
     );

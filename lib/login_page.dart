@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:ifmd_app/constants/common_appbar.dart';
+
 import 'package:ifmd_app/service/auth.dart';
 
 import 'home_page.dart';
@@ -91,110 +91,144 @@ class _LoginPageState extends State<LoginPage> {
     );
 
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 184, 192, 162),
-      appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(250),
-          child: CommonAppBar(
-              title: "IFMD", onProfileTap: () {}, onSettingsTap: () {})),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
+      body: Stack(
+        children: [
+          // Arka plan resmi
+          Positioned.fill(
+            child: Image.asset(
+              'assets/images/Fatihistanbul.jpg', // Resim dosyanızın yolu
+              fit: BoxFit.cover,
+            ),
+          ),
+          // AppBar ve içerik
+          Column(
             children: [
-              TextField(
-                controller: emailController,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  hintText: "E-posta adresinizi girin",
+              AppBar(
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+                title: const Text(
+                  "IFMD ye hoşgeldiniz",
+                  style: TextStyle(color: Color.fromARGB(255, 99, 14, 14)),
                 ),
+                centerTitle: true,
               ),
-              const SizedBox(height: 20),
-              TextField(
-                controller: passwordController,
-                obscureText: !passwordVisible,
-                decoration: InputDecoration(
-                  border: const OutlineInputBorder(),
-                  hintText: "Şifre",
-                  labelText: "Şifre",
-                  helperText: "Şifre en az 6 karakter olmalıdır.",
-                  suffixIcon: IconButton(
-                    icon: Icon(
-                      passwordVisible ? Icons.visibility : Icons.visibility_off,
+              Expanded(
+                child: Center(
+                  child: SingleChildScrollView(
+                    child: Container(
+                      padding: const EdgeInsets.all(16.0),
+                      decoration: BoxDecoration(
+                        color: Colors.white
+                            .withOpacity(0.59), // Yarı saydam beyaz arka plan
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      child: Column(
+                        children: [
+                          TextField(
+                            controller: emailController,
+                            decoration: const InputDecoration(
+                              border: OutlineInputBorder(),
+                              hintText: "E-posta adresinizi girin",
+                            ),
+                          ),
+                          const SizedBox(height: 20),
+                          TextField(
+                            controller: passwordController,
+                            obscureText: !passwordVisible,
+                            decoration: InputDecoration(
+                              border: const OutlineInputBorder(),
+                              hintText: "Şifre",
+                              labelText: "Şifre",
+                              helperText: "Şifre en az 6 karakter olmalıdır.",
+                              suffixIcon: IconButton(
+                                icon: Icon(
+                                  passwordVisible
+                                      ? Icons.visibility
+                                      : Icons.visibility_off,
+                                ),
+                                onPressed: () {
+                                  setState(() {
+                                    passwordVisible = !passwordVisible;
+                                  });
+                                },
+                              ),
+                            ),
+                            keyboardType: TextInputType.visiblePassword,
+                            textInputAction: TextInputAction.done,
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          TextField(
+                            controller: nameController,
+                            decoration: const InputDecoration(
+                              border: OutlineInputBorder(),
+                              hintText: "İsim Soyisim",
+                            ),
+                          ),
+                          const SizedBox(height: 20),
+                          ElevatedButton(
+                            onPressed: createUser,
+                            style: ButtonStyle(
+                              backgroundColor:
+                                  MaterialStateProperty.all(Colors.greenAccent),
+                              padding: MaterialStateProperty.all(
+                                const EdgeInsets.symmetric(
+                                    vertical: 18, horizontal: 50),
+                              ),
+                              shape: MaterialStateProperty.all(
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(30),
+                                  side: const BorderSide(
+                                      color: Colors.greenAccent, width: 2),
+                                ),
+                              ),
+                            ),
+                            child: const Text(
+                              "Kayıt Ol",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 20),
+                          ElevatedButton(
+                            onPressed: signIn,
+                            style: ButtonStyle(
+                              backgroundColor:
+                                  MaterialStateProperty.all(Colors.blueAccent),
+                              padding: MaterialStateProperty.all(
+                                const EdgeInsets.symmetric(
+                                    vertical: 18, horizontal: 50),
+                              ),
+                              shape: MaterialStateProperty.all(
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(30),
+                                  side: const BorderSide(
+                                      color: Colors.blueAccent, width: 2),
+                                ),
+                              ),
+                            ),
+                            child: const Text(
+                              "Giriş Yap",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                    onPressed: () {
-                      setState(() {
-                        passwordVisible = !passwordVisible;
-                      });
-                    },
-                  ),
-                ),
-                keyboardType: TextInputType.visiblePassword,
-                textInputAction: TextInputAction.done,
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              TextField(
-                controller: nameController,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                  hintText: "isim soyism",
-                ),
-              ),
-              const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: createUser,
-                style: ButtonStyle(
-                  backgroundColor:
-                      MaterialStateProperty.all(Colors.greenAccent),
-                  padding: MaterialStateProperty.all(
-                    const EdgeInsets.symmetric(vertical: 18, horizontal: 50),
-                  ),
-                  shape: MaterialStateProperty.all(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30),
-                      side:
-                          const BorderSide(color: Colors.greenAccent, width: 2),
-                    ),
-                  ),
-                ),
-                child: const Text(
-                  "Kayıt Ol",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-              const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: signIn,
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(Colors.blueAccent),
-                  padding: MaterialStateProperty.all(
-                    const EdgeInsets.symmetric(vertical: 18, horizontal: 50),
-                  ),
-                  shape: MaterialStateProperty.all(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30),
-                      side:
-                          const BorderSide(color: Colors.blueAccent, width: 2),
-                    ),
-                  ),
-                ),
-                child: const Text(
-                  "Giriş Yap",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
             ],
           ),
-        ),
+        ],
       ),
     );
   }

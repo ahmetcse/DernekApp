@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:ifmd_app/communication_page.dart';
+import 'package:ifmd_app/events_page.dart';
 import 'package:ifmd_app/models/card_models.dart';
 
 class GridViewWidget extends StatelessWidget {
@@ -11,32 +13,32 @@ class GridViewWidget extends StatelessWidget {
       CardItem(
         title: ' Etkinlikler',
         icon: Icons.event, // Örnek icon
-        link: 'https://www.example1.com',
+        page: const EventsPage(),
       ),
       CardItem(
         title: 'Kurslar',
         icon: Icons.school, // Örnek icon
-        link: 'https://www.example2.com',
+        page: const EventsPage(),
       ),
       CardItem(
         title: 'Yayınlar',
         icon: Icons.newspaper, // Örnek icon
-        link: 'https://www.example3.com',
+        page: const EventsPage(),
       ),
       CardItem(
         title: 'İlanlar',
         icon: Icons.shopping_bag, // Örnek icon
-        link: 'https://www.example4.com',
+        page: const EventsPage(),
       ),
       CardItem(
         title: 'Anket',
         icon: Icons.poll, // Örnek icon
-        link: 'https://www.youtube.com',
+        page: const EventsPage(),
       ),
       CardItem(
         title: 'Destek',
         icon: Icons.email, // Örnek icon
-        link: 'https://www.example6.com',
+        page: const CommunicationPage(),
       ),
     ];
 
@@ -55,9 +57,12 @@ class GridViewWidget extends StatelessWidget {
       itemBuilder: (context, index) {
         return GestureDetector(
           onTap: () {
-            // Linke gitme işlemi
-            // (Burada linki açmak için bir webview veya browser ile işlem yapılabilir)
-            print('Navigating to: ${cardItems[index].link}');
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => cardItems[index].page,
+              ),
+            );
           },
           child: Card(
             elevation: 4, // Card'a gölge efekti

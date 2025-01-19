@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 class CardItem {
   final String title;
   final IconData icon;
-  final String link;
+  final Widget page;
 
   CardItem({
     required this.title,
     required this.icon,
-    required this.link,
+    required this.page,
   });
 }
