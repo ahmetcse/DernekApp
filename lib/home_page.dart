@@ -37,6 +37,7 @@ class _MainPageState extends State<MainPage> {
       appBar: CommonAppBar(
         title: "",
         onProfileTap: () {
+          const Icon(Icons.sim_card);
           print("Profile tapped from app bar!");
         },
         onSettingsTap: () {

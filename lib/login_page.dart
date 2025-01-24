@@ -4,8 +4,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:ifmd_app/service/auth.dart';
 
-import 'home_page.dart';
-
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
@@ -18,6 +16,7 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController nameController = TextEditingController();
   final Auth _firebaseAuth = Auth();
+  final Auth firestore = Auth();
   bool passwordVisible = false;
 
   Future<void> createUser() async {
@@ -39,22 +38,6 @@ class _LoginPageState extends State<LoginPage> {
             ),
           ],
         ),
-      );
-    } on FirebaseAuthException catch (e) {
-      _showErrorDialog(e.message ?? 'Bir hata oluştu.');
-    }
-  }
-
-  Future<void> signIn() async {
-    try {
-      await _firebaseAuth.signIn(
-        email: emailController.text.trim(),
-        password: passwordController.text.trim(),
-        name: passwordController.text.trim(),
-      );
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => const MainPage()),
       );
     } on FirebaseAuthException catch (e) {
       _showErrorDialog(e.message ?? 'Bir hata oluştu.');
@@ -171,7 +154,7 @@ class _LoginPageState extends State<LoginPage> {
                             onPressed: createUser,
                             style: ButtonStyle(
                               backgroundColor:
-                                  MaterialStateProperty.all(Colors.greenAccent),
+                                  MaterialStateProperty.all(Colors.transparent),
                               padding: MaterialStateProperty.all(
                                 const EdgeInsets.symmetric(
                                     vertical: 18, horizontal: 50),
@@ -180,7 +163,7 @@ class _LoginPageState extends State<LoginPage> {
                                 RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(30),
                                   side: const BorderSide(
-                                      color: Colors.greenAccent, width: 2),
+                                      color: Colors.transparent, width: 2),
                                 ),
                               ),
                             ),
@@ -195,10 +178,17 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                           const SizedBox(height: 20),
                           ElevatedButton(
-                            onPressed: signIn,
+                            onPressed: () async {
+                              Auth auth = Auth();
+                              await auth.signIn(
+                                email: emailController.text.trim(),
+                                password: passwordController.text.trim(),
+                                context: context,
+                              ); // BuildContext'i geçiyoruz
+                            },
                             style: ButtonStyle(
                               backgroundColor:
-                                  MaterialStateProperty.all(Colors.blueAccent),
+                                  MaterialStateProperty.all(Colors.transparent),
                               padding: MaterialStateProperty.all(
                                 const EdgeInsets.symmetric(
                                     vertical: 18, horizontal: 50),
@@ -207,7 +197,7 @@ class _LoginPageState extends State<LoginPage> {
                                 RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(30),
                                   side: const BorderSide(
-                                      color: Colors.blueAccent, width: 2),
+                                      color: Colors.transparent, width: 2),
                                 ),
                               ),
                             ),

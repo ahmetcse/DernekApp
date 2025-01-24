@@ -40,7 +40,6 @@ class _HomePageState extends State<HomePage> {
             "Derneğimiz",
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
-          
           const Expanded(child: GridViewWidget()),
         ],
       ),

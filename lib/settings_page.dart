@@ -38,7 +38,7 @@ class SettingsPage extends StatelessWidget {
                       color: Colors.white, // Simge rengi
                     ),
                     Text(
-                      '   Go Premium',
+                      '   ',
                       style: TextStyle(
                         fontSize: 16,
                         color: Colors.white, // Yazı rengi beyaz
