@@ -76,8 +76,7 @@ class Auth {
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-                builder: (context) =>
-                    const AdminPanel()), // MainPage yönlendirmesi
+                builder: (context) => AdminPanel()), // MainPage yönlendirmesi
           );
         }
       } else {
