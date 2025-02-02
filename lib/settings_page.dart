@@ -1,96 +1,111 @@
 import 'package:flutter/material.dart';
 
 class SettingsPage extends StatelessWidget {
+  const SettingsPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
-      body: ListView(
-        padding: const EdgeInsets.all(16.0),
-        children: [
-          // Büyük "Settings" başlığı
-          const Padding(
-            padding: EdgeInsets.only(bottom: 24.0),
-            child: Text(
-              'Settings',
-              style: TextStyle(
-                fontSize: 28,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
+      appBar: AppBar(
+        backgroundColor: Colors.grey[300],
+        title: const Text(''),
+      ),
+      body: Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/images/Fatihistanbul.jpg'),
+            fit: BoxFit.cover,
           ),
-          ElevatedButton(
-            onPressed: () {}, // Tıklanabilir ama işlevsellik yok
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.teal,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-            ),
-            child: const Row(
-              mainAxisAlignment: MainAxisAlignment.start, // Yazıyı sola hizalar
-              children: [
-                Row(
-                  children: [
-                    Icon(
-                      Icons.crop, // Simge
-                      color: Colors.white, // Simge rengi
-                    ),
-                    Text(
-                      '   ',
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.white, // Yazı rengi beyaz
-                      ),
-                    ),
-                  ],
+        ),
+        child: ListView(
+          padding: const EdgeInsets.all(16.0),
+          children: [
+            // Büyük "Settings" başlığı
+            const Padding(
+              padding: EdgeInsets.only(bottom: 24.0),
+              child: Text(
+                'Settings',
+                style: TextStyle(
+                  fontSize: 28,
+                  fontWeight: FontWeight.bold,
                 ),
-              ],
+              ),
             ),
-          ),
-          const SizedBox(height: 16),
-          const SectionHeader(title: 'General'),
-          SettingsItem(
-            icon: Icons.description,
-            title: 'Terms of Service',
-            onTap: () {}, // Tıklanabilir ama yönlendirme yok
-          ),
-          SettingsItem(
-            icon: Icons.privacy_tip,
-            title: 'Privacy Policy',
-            onTap: () {}, // Tıklanabilir ama yönlendirme yok
-          ),
-          const SizedBox(height: 16),
-          const SectionHeader(title: 'Feedback'),
-          SettingsItem(
-            icon: Icons.star_rate,
-            title: 'Rate the App',
-            onTap: () {}, // Tıklanabilir ama yönlendirme yok
-          ),
-          SettingsItem(
-            icon: Icons.rate_review,
-            title: 'Write a Review',
-            onTap: () {}, // Tıklanabilir ama yönlendirme yok
-          ),
-          SettingsItem(
-            icon: Icons.share,
-            title: 'Share the App',
-            onTap: () {}, // Tıklanabilir ama yönlendirme yok
-          ),
-          const SizedBox(height: 16),
-          const SectionHeader(title: 'Account'),
-          SettingsItem(
-            icon: Icons.mail,
-            title: 'Contact Support',
-            onTap: () {}, // Tıklanabilir ama yönlendirme yok
-          ),
-          SettingsItem(
-            icon: Icons.restore,
-            title: 'Restore Purchases',
-            onTap: () {}, // Tıklanabilir ama yönlendirme yok
-          ),
-        ],
+            ElevatedButton(
+              onPressed: () {}, // Tıklanabilir ama işlevsellik yok
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.teal,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+              ),
+              child: const Row(
+                mainAxisAlignment:
+                    MainAxisAlignment.start, // Yazıyı sola hizalar
+                children: [
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.crop, // Simge
+                        color: Colors.white, // Simge rengi
+                      ),
+                      Text(
+                        '   ',
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: Colors.white, // Yazı rengi beyaz
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 16),
+            const SectionHeader(title: 'General'),
+            SettingsItem(
+              icon: Icons.description,
+              title: 'Terms of Service',
+              onTap: () {}, // Tıklanabilir ama yönlendirme yok
+            ),
+            SettingsItem(
+              icon: Icons.privacy_tip,
+              title: 'Privacy Policy',
+              onTap: () {}, // Tıklanabilir ama yönlendirme yok
+            ),
+            const SizedBox(height: 16),
+            const SectionHeader(title: 'Feedback'),
+            SettingsItem(
+              icon: Icons.star_rate,
+              title: 'Rate the App',
+              onTap: () {}, // Tıklanabilir ama yönlendirme yok
+            ),
+            SettingsItem(
+              icon: Icons.rate_review,
+              title: 'Write a Review',
+              onTap: () {}, // Tıklanabilir ama yönlendirme yok
+            ),
+            SettingsItem(
+              icon: Icons.share,
+              title: 'Share the App',
+              onTap: () {}, // Tıklanabilir ama yönlendirme yok
+            ),
+            const SizedBox(height: 16),
+            const SectionHeader(title: 'Account'),
+            SettingsItem(
+              icon: Icons.mail,
+              title: 'Contact Support',
+              onTap: () {}, // Tıklanabilir ama yönlendirme yok
+            ),
+            SettingsItem(
+              icon: Icons.restore,
+              title: 'Restore Purchases',
+              onTap: () {}, // Tıklanabilir ama yönlendirme yok
+            ),
+          ],
+        ),
       ),
     );
   }
