@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ifmd_app/communication_page.dart';
 import 'package:ifmd_app/events_page.dart';
 import 'package:ifmd_app/models/card_models.dart';
+import 'package:ifmd_app/survey_page.dart';
 
 class GridViewWidget extends StatelessWidget {
   const GridViewWidget({Key? key}) : super(key: key);
@@ -33,7 +34,7 @@ class GridViewWidget extends StatelessWidget {
       CardItem(
         title: 'Anket',
         icon: Icons.poll, // Örnek icon
-        page: const EventsPage(),
+        page: const SurveyPage(),
       ),
       CardItem(
         title: 'Destek',
